@@ -1,6 +1,6 @@
-import { useEffect, useState, useCallback } from "react";
-import { Link } from "@tanstack/react-router";
-import { Menu, X, ChevronUp } from "lucide-react";
+﻿import { useCallback, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { ChevronUp, Menu, Phone, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo/IfatyBeachClub.jpg";
 
@@ -15,7 +15,18 @@ const NAV = [
   { label: "Contact", href: "#contact" },
 ];
 
-const SECTION_IDS = ["top", "presentation", "rooms", "services", "activities", "gallery", "attractions", "reviews", "location", "contact"];
+const SECTION_IDS = [
+  "top",
+  "presentation",
+  "rooms",
+  "services",
+  "activities",
+  "gallery",
+  "attractions",
+  "reviews",
+  "location",
+  "contact",
+];
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -28,171 +39,181 @@ export function Header() {
       setScrolled(window.scrollY > 40);
       setShowBackToTop(window.scrollY > 600);
     };
+
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // IntersectionObserver to track active section
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
+
     SECTION_IDS.forEach((id) => {
       const el = document.getElementById(id);
       if (!el) return;
+
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setActiveSection(id);
-            }
+            if (entry.isIntersecting) setActiveSection(id);
           });
         },
-        { rootMargin: "-30% 0px -60% 0px" }
+        { rootMargin: "-30% 0px -60% 0px" },
       );
+
       observer.observe(el);
       observers.push(observer);
     });
-    return () => observers.forEach((o) => o.disconnect());
+
+    return () => observers.forEach((observer) => observer.disconnect());
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
       document.body.style.overflow = "";
-    }
-    return () => { document.body.style.overflow = ""; };
+    };
   }, [open]);
 
-  const isActive = useCallback((href: string) => {
-    if (href.startsWith("#")) {
-      return activeSection === href.replace("#", "");
-    }
-    return false;
-  }, [activeSection]);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const isActive = useCallback(
+    (href: string) => href.startsWith("#") && activeSection === href.replace("#", ""),
+    [activeSection],
+  );
 
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-          scrolled ? "bg-background/90 backdrop-blur-md shadow-card" : "bg-transparent"
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+          scrolled ? "bg-background/90 shadow-card backdrop-blur-md" : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-5 lg:px-8 h-16 lg:h-20 flex items-center justify-between">
-          <Link to="/" hash="top" className="flex items-center gap-2 group">
-            <div className="h-12 w-12 overflow-hidden rounded-full bg-white shadow-soft ring-1 ring-white/40 group-hover:ring-accent/60 transition-all">
-              <img
-                src={logo}
-                alt="Ifaty Beach Club"
-                className="h-full w-full object-cover"
-              />
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 lg:h-20 lg:px-8">
+          <Link
+            to="/#top"
+            className="group flex items-center gap-3"
+            onClick={() => setOpen(false)}
+          >
+            <div className="h-12 w-12 overflow-hidden radius-pill bg-white shadow-soft ring-1 ring-white/40 transition-all group-hover:ring-accent/70">
+              <img src={logo} alt="Ifaty Beach Club" className="h-full w-full object-cover" />
             </div>
-            <div className={`leading-tight transition-colors ${scrolled ? "text-foreground" : "text-white"}`}>
+            <div
+              className={`leading-tight transition-colors ${scrolled ? "text-foreground" : "text-white"}`}
+            >
               <div className="font-display text-lg font-semibold">Ifaty Beach Club</div>
-              <div className="text-[10px] uppercase tracking-[0.2em] opacity-80">Madagascar</div>
+              <div className="text-[10px] uppercase tracking-[0.2em] opacity-80">
+                Mangily, Madagascar
+              </div>
             </div>
           </Link>
-          <nav className="hidden lg:flex items-center gap-7">
-            {NAV.map((n) => {
-              const isExternal = n.href.startsWith("#");
-              const active = isActive(n.href);
+
+          <nav className="hidden items-center gap-6 lg:flex">
+            {NAV.map((item) => {
+              const isHash = item.href.startsWith("#");
               const className = `text-sm font-medium transition-colors hover:text-accent ${
                 scrolled ? "text-foreground" : "text-white/90"
-              } ${active ? "nav-link-active" : ""}`;
-              return isExternal ? (
+              } ${isActive(item.href) ? "nav-link-active" : ""}`;
+
+              return isHash ? (
                 <Link
-                  key={n.href}
-                  to="/"
-                  hash={n.href.replace("#", "")}
+                  key={item.href}
+                  to={`/${item.href}`}
                   className={className}
                 >
-                  {n.label}
+                  {item.label}
                 </Link>
               ) : (
-                <Link
-                  key={n.href}
-                  to={n.href}
-                  className={className}
-                >
-                  {n.label}
+                <Link key={item.href} to={item.href} className={className}>
+                  {item.label}
                 </Link>
               );
             })}
           </nav>
+
           <div className="flex items-center gap-2">
-            <Link to="/" hash="contact" className="hidden sm:inline-flex">
-              <Button className="bg-gradient-sunset text-primary-foreground border-0 hover:opacity-90 rounded-full px-5 hover:scale-105 transition-transform">
+            <a
+              href="tel:+261346117982"
+              className={`hidden items-center gap-2 text-sm font-medium transition-colors hover:text-accent xl:inline-flex ${
+                scrolled ? "text-foreground" : "text-white/90"
+              }`}
+            >
+              <Phone className="h-4 w-4" />
+              +261 34 61 179 82
+            </a>
+            <Link to="/#contact" className="hidden sm:inline-flex">
+              <Button className="radius-pill border-0 bg-gradient-sunset px-5 text-primary-foreground transition-transform hover:scale-105 hover:opacity-90">
                 Réserver
               </Button>
             </Link>
             <button
-              className={`lg:hidden p-2 rounded-md transition-colors ${scrolled ? "text-foreground" : "text-white"}`}
-              onClick={() => setOpen((v) => !v)}
-              aria-label="Menu"
+              className={`radius-control p-2 transition-colors lg:hidden ${scrolled || open ? "text-foreground" : "text-white"}`}
+              onClick={() => setOpen((value) => !value)}
+              aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-expanded={open}
             >
               {open ? <X /> : <Menu />}
             </button>
           </div>
         </div>
-        {/* Mobile menu — full overlay */}
+
         {open && (
-          <div className="lg:hidden fixed inset-0 top-16 z-40">
-            {/* Backdrop */}
+          <div className="fixed inset-0 top-16 z-40 lg:hidden">
             <div
               className="absolute inset-0 bg-black/40 backdrop-blur-sm lightbox-backdrop"
               onClick={() => setOpen(false)}
             />
-            {/* Panel */}
-            <div className="relative bg-background border-t border-border shadow-soft menu-slide-down">
-              <div className="px-5 py-5 flex flex-col gap-1">
-                {NAV.map((n) => {
-                  const isExternal = n.href.startsWith("#");
-                  const active = isActive(n.href);
-                  const linkClass = `text-foreground py-3 px-4 rounded-xl transition-all font-medium text-sm ${
-                    active ? "bg-primary/10 text-primary" : "hover:bg-muted"
+            <div className="relative border-t border-border bg-background shadow-soft menu-slide-down">
+              <div className="flex flex-col gap-1 px-5 py-5">
+                {NAV.map((item) => {
+                  const isHash = item.href.startsWith("#");
+                  const linkClass = `radius-panel px-4 py-3 text-sm font-medium transition-all ${
+                    isActive(item.href)
+                      ? "bg-primary/10 text-primary"
+                      : "text-foreground hover:bg-muted"
                   }`;
-                  return isExternal ? (
+
+                  return isHash ? (
                     <Link
-                      key={n.href}
-                      to="/"
-                      hash={n.href.replace("#", "")}
+                      key={item.href}
+                      to={`/${item.href}`}
                       onClick={() => setOpen(false)}
                       className={linkClass}
                     >
-                      {n.label}
+                      {item.label}
                     </Link>
                   ) : (
                     <Link
-                      key={n.href}
-                      to={n.href}
+                      key={item.href}
+                      to={item.href}
                       onClick={() => setOpen(false)}
                       className={linkClass}
                     >
-                      {n.label}
+                      {item.label}
                     </Link>
                   );
                 })}
-                <Link to="/" hash="contact" onClick={() => setOpen(false)} className="mt-3">
-                  <Button className="w-full bg-gradient-sunset text-primary-foreground border-0 hover:opacity-90 rounded-full h-12">
+                <Link to="/#contact" onClick={() => setOpen(false)} className="mt-3">
+                  <Button className="h-12 w-full radius-pill border-0 bg-gradient-sunset text-primary-foreground hover:opacity-90">
                     Réserver une chambre
                   </Button>
                 </Link>
+                <a
+                  href="tel:+261346117982"
+                  className="mt-2 flex items-center justify-center gap-2 radius-pill border border-border px-4 py-3 text-sm font-medium text-foreground"
+                >
+                  <Phone className="h-4 w-4" />
+                  Appeler l'hôtel
+                </a>
               </div>
             </div>
           </div>
         )}
       </header>
 
-      {/* Back to Top Button */}
       {showBackToTop && (
         <button
-          onClick={scrollToTop}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           aria-label="Retour en haut"
-          className="fixed bottom-24 right-6 z-40 h-11 w-11 rounded-full bg-primary text-primary-foreground grid place-items-center shadow-soft hover:scale-110 transition-transform back-to-top-enter"
+          className="fixed bottom-24 right-6 z-40 grid h-11 w-11 place-items-center radius-pill bg-primary text-primary-foreground shadow-soft transition-transform hover:scale-110 back-to-top-enter"
         >
           <ChevronUp className="h-5 w-5" />
         </button>

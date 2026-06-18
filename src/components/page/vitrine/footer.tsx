@@ -1,94 +1,116 @@
-import { Link } from "@tanstack/react-router";
-import { Facebook, Instagram, MessageCircle, MapPin, Phone, Mail, Heart } from "lucide-react";
+﻿import { Link } from "react-router-dom";
+import { Facebook, Heart, Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import logo from "@/assets/logo/IfatyBeachClub.jpg";
+
+const quickLinks = [
+  { label: "Accueil", to: "/#top" },
+  { label: "Hébergements", to: "/hebergements" },
+  { label: "Activités", to: "/activites" },
+  { label: "Galerie", to: "/#gallery" },
+  { label: "Contact", to: "/#contact" },
+];
 
 export function Footer() {
   return (
-    <footer className="bg-[color:var(--deep)] text-white pt-16 pb-8 px-5 lg:px-8 relative overflow-hidden">
-      {/* Decorative blur */}
-      <div className="absolute -top-32 -right-32 h-64 w-64 rounded-full bg-primary/10 blur-[100px]" />
-      <div className="absolute -bottom-24 -left-24 h-48 w-48 rounded-full bg-sunset/10 blur-[80px]" />
-
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-10 relative">
+    <footer className="relative overflow-hidden bg-[color:var(--deep)] px-5 pt-16 pb-8 text-white lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_0.8fr_1fr_1fr]">
         <div>
-          <div className="flex items-center gap-2 mb-4">
-            <div className="h-12 w-12 overflow-hidden rounded-full bg-white ring-1 ring-white/20">
-              <img
-                src={logo}
-                alt="Ifaty Beach Club"
-                className="h-full w-full object-cover"
-              />
+          <div className="mb-4 flex items-center gap-3">
+            <div className="h-12 w-12 overflow-hidden radius-pill bg-white ring-1 ring-white/20">
+              <img src={logo} alt="Ifaty Beach Club" className="h-full w-full object-cover" />
             </div>
-            <div className="font-display text-lg font-semibold">Ifaty Beach Club</div>
+            <div>
+              <div className="font-display text-lg font-semibold">Ifaty Beach Club</div>
+              <div className="text-[10px] uppercase tracking-[0.2em] text-white/55">
+                Hôtel face au lagon
+              </div>
+            </div>
           </div>
-          <p className="text-white/70 text-sm leading-relaxed">
-            Hôtel 3 étoiles face au lagon d'Ifaty. Bungalows, piscines, excursions et couchers de soleil inoubliables.
+          <p className="max-w-sm text-sm leading-relaxed text-white/70">
+            Hôtel 3 étoiles à Mangily, Ifaty. Bungalows, piscines, restaurant, excursions marines et
+            couchers de soleil inoubliables au sud-ouest de Madagascar.
           </p>
+          <div className="mt-6 flex flex-wrap gap-2 text-xs text-white/70">
+            <span className="radius-pill bg-white/10 px-3 py-1">Réception 24h/24</span>
+            <span className="radius-pill bg-white/10 px-3 py-1">Transfert aéroport</span>
+            <span className="radius-pill bg-white/10 px-3 py-1">Wi-Fi gratuit</span>
+          </div>
         </div>
+
         <div>
-          <h4 className="font-semibold mb-4 text-sm uppercase tracking-wider">Navigation</h4>
+          <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider">Navigation</h4>
           <ul className="space-y-2 text-sm text-white/70">
-            <li>
-              <Link to="/" hash="top" className="hover:text-accent transition-colors">Accueil</Link>
-            </li>
-            <li>
-              <Link to="/hebergements" className="hover:text-accent transition-colors">Chambres</Link>
-            </li>
-            <li>
-              <Link to="/activites" className="hover:text-accent transition-colors">Activités</Link>
-            </li>
-            <li>
-              <Link to="/" hash="contact" className="hover:text-accent transition-colors">Contact</Link>
-            </li>
+            {quickLinks.map((link) => (
+              <li key={`${link.to}-${link.label}`}>
+                <Link to={link.to} className="transition-colors hover:text-accent">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
+
         <div>
-          <h4 className="font-semibold mb-4 text-sm uppercase tracking-wider">Contact</h4>
+          <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider">Contact</h4>
           <ul className="space-y-3 text-sm text-white/70">
             <li className="flex items-start gap-2">
-              <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-accent" />
-              <span>VJF5+F99, Mangily, Ifaty</span>
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+              <span>VJF5+F99, Mangily, Ifaty, Madagascar</span>
             </li>
             <li className="flex items-center gap-2">
               <Phone className="h-4 w-4 shrink-0 text-accent" />
-              <a href="tel:+261346117982" className="hover:text-white transition-colors">+261 34 61 179 82</a>
+              <a href="tel:+261346117982" className="transition-colors hover:text-white">
+                +261 34 61 179 82
+              </a>
             </li>
             <li className="flex items-center gap-2">
               <Mail className="h-4 w-4 shrink-0 text-accent" />
-              <a href="mailto:contact@ifatybeachclub.mg" className="hover:text-white transition-colors">contact@ifatybeachclub.mg</a>
+              <a
+                href="mailto:contact@ifatybeachclub.mg"
+                className="transition-colors hover:text-white"
+              >
+                contact@ifatybeachclub.mg
+              </a>
             </li>
           </ul>
         </div>
+
         <div>
-          <h4 className="font-semibold mb-4 text-sm uppercase tracking-wider">Suivez-nous</h4>
+          <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider">Suivez-nous</h4>
           <div className="flex gap-3">
             {[
               { icon: Facebook, href: "#", label: "Facebook" },
               { icon: Instagram, href: "#", label: "Instagram" },
               { icon: MessageCircle, href: "https://wa.me/261346117982", label: "WhatsApp" },
-            ].map((s) => (
+            ].map((social) => (
               <a
-                key={s.label}
-                href={s.href}
+                key={social.label}
+                href={social.href}
                 target="_blank"
                 rel="noreferrer"
-                aria-label={s.label}
-                className="h-10 w-10 rounded-full bg-white/10 hover:bg-accent hover:scale-110 grid place-items-center transition-all"
+                aria-label={social.label}
+                className="grid h-10 w-10 place-items-center radius-pill bg-white/10 transition-all hover:scale-110 hover:bg-accent"
               >
-                <s.icon className="h-4 w-4" />
+                <social.icon className="h-4 w-4" />
               </a>
             ))}
           </div>
-          <p className="mt-5 text-xs text-white/50 leading-relaxed">
-            Réception ouverte 24h/24<br />
-            Transfert aéroport disponible
-          </p>
+          <a
+            href="https://wa.me/261346117982"
+            target="_blank"
+            rel="noreferrer"
+            className="mt-6 inline-flex items-center gap-2 radius-pill bg-white px-5 py-3 text-sm font-semibold text-[color:var(--deep)] transition-transform hover:scale-105"
+          >
+            <MessageCircle className="h-4 w-4" />
+            Écrire sur WhatsApp
+          </a>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto mt-12 pt-6 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/60">
-        <span>© {new Date().getFullYear()} Ifaty Beach Club — Tous droits réservés</span>
+
+      <div className="mx-auto mt-12 flex max-w-7xl flex-col items-center justify-between gap-3 border-t border-white/15 pt-6 text-xs text-white/60 sm:flex-row">
+        <span>© {new Date().getFullYear()} Ifaty Beach Club - Tous droits réservés</span>
         <span className="flex items-center gap-1">
-          Fait avec <Heart className="h-3 w-3 text-accent fill-current" /> à Madagascar
+          Fait avec <Heart className="h-3 w-3 fill-current text-accent" /> à Madagascar
         </span>
       </div>
     </footer>
