@@ -36,22 +36,24 @@ import { Footer } from "./footer";
 import { Header } from "./header";
 
 import actPirogue from "@/assets/activity-pirogue.jpg";
-import actQuad from "@/assets/activity-quad.jpg";
+import actQuad from "@/assets/images/quad.jpeg";
 import actSnorkel from "@/assets/activity-snorkeling.jpg";
 import actWhales from "@/assets/activity-whales.jpg";
 import attrBaobabs from "@/assets/attraction-baobabs.jpg";
 import attrSpiny from "@/assets/attraction-spiny.jpg";
 import attrTortoises from "@/assets/attraction-tortoises.jpg";
-import galBeach from "@/assets/gallery-beach.jpg";
-import galPool from "@/assets/gallery-pool.jpg";
-import galRestaurant from "@/assets/gallery-restaurant.jpg";
-import galSunset from "@/assets/gallery-sunset.jpg";
-import hero from "@/assets/hero-lagoon.jpg";
-import presentation from "@/assets/presentation.jpg";
-import roomDouble from "@/assets/room-double.jpg";
+import galBeach from "@/assets/images/ifaty_plage.jpeg";
+import galPool from "@/assets/images/vue_piscine.jpg";
+import galRestaurant from "@/assets/images/vue_table_manger.jpg";
+import galSunset from "@/assets/images/vue_cocher_soleil.jpg";
+import hero from "@/assets/images/vue_plage.jpg";
+import presentation from "@/assets/images/vue_bengalow (1).jpg";
+import roomDouble from "@/assets/images/deux_lit_twin.jpeg";
+import roomDouble2 from "@/assets/room-double.jpg";
+console.log("roomDouble =", roomDouble);
 import roomFamily from "@/assets/room-family.jpg";
-import roomGarden from "@/assets/room-bungalow-garden.jpg";
-import roomSea from "@/assets/room-bungalow-sea.jpg";
+import roomGarden from "@/assets/images/bengalowTest.jpeg";
+import roomSea from "@/assets/images/vue_bengalow2.jpg";
 
 type SectionProps = {
   id: string;
@@ -68,7 +70,7 @@ const ROOMS = [
     type: "Double",
     // capacity: 2,
     // price: 65,
-    img: roomDouble,
+    img: roomDouble2,
     features: ["Vue jardin", "Salle de bain privative", "Ventilateur"],
   },
   {
@@ -120,7 +122,12 @@ const SERVICES = [
 
 const ACTIVITIES = [
   { name: "Snorkeling", cat: "Nautique", img: actSnorkel, icon: Fish },
-  { name: "Sorties en pirogue", cat: "Nautique", img: actPirogue, icon: Sailboat },
+  {
+    name: "Sorties en pirogue",
+    cat: "Nautique",
+    img: actPirogue,
+    icon: Sailboat,
+  },
   {
     name: "Observation des baleines",
     cat: "Nature",
@@ -169,16 +176,30 @@ const GALLERY = [
   { src: actPirogue, className: "", alt: "Pirogue traditionnelle" },
 ];
 
-function Section({ id, eyebrow, title, subtitle, className, children }: SectionProps) {
+function Section({
+  id,
+  eyebrow,
+  title,
+  subtitle,
+  className,
+  children,
+}: SectionProps) {
   return (
-    <section id={id} className={`px-5 py-20 lg:px-8 lg:py-28 reveal ${className ?? ""}`}>
+    <section
+      id={id}
+      className={`px-5 py-20 lg:px-8 lg:py-28 reveal ${className ?? ""}`}
+    >
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto mb-12 max-w-3xl text-center">
           <p className="mb-3 text-xs font-medium uppercase tracking-[0.3em] text-accent">
             {eyebrow}
           </p>
-          <h2 className="font-display text-3xl font-semibold leading-tight md:text-5xl">{title}</h2>
-          {subtitle && <p className="mt-4 text-lg text-muted-foreground">{subtitle}</p>}
+          <h2 className="font-display text-3xl font-semibold leading-tight md:text-5xl">
+            {title}
+          </h2>
+          {subtitle && (
+            <p className="mt-4 text-lg text-muted-foreground">{subtitle}</p>
+          )}
         </div>
         {children}
       </div>
@@ -224,11 +245,12 @@ function Hero() {
             Mangily - Ifaty - Madagascar
           </p>
           <h1 className="font-display text-4xl font-semibold leading-[1.05] sm:text-6xl lg:text-7xl">
-            Ifaty Beach Club, hôtel face au lagon
+            Ifaty Beach Club, hôtel face au lagonnnnn
           </h1>
+
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/90 md:text-xl">
-            Séjournez entre plage, piscines, bungalows tropicaux et excursions marines dans l'une
-            des plus belles baies du sud-ouest malgache.
+            Séjournez entre plage, piscines, bungalows tropicaux et excursions
+            marines dans l'une des plus belles baies du sud-ouest malgache.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <a href="#contact">
@@ -262,7 +284,9 @@ function Hero() {
                 <item.icon className="h-5 w-5" />
               </span>
               <div>
-                <div className="font-display text-xl font-semibold leading-none">{item.value}</div>
+                <div className="font-display text-xl font-semibold leading-none">
+                  {item.value}
+                </div>
                 <div className="mt-1 text-xs uppercase tracking-[0.18em] text-white/70">
                   {item.label}
                 </div>
@@ -277,7 +301,10 @@ function Hero() {
 
 function Presentation() {
   return (
-    <section id="presentation" className="bg-secondary/40 px-5 py-20 lg:px-8 lg:py-28 reveal">
+    <section
+      id="presentation"
+      className="bg-secondary/40 px-5 py-20 lg:px-8 lg:py-28 reveal"
+    >
       <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2">
         <div className="relative">
           <img
@@ -291,7 +318,9 @@ function Presentation() {
               <Star className="h-6 w-6 fill-current" />
             </span>
             <div>
-              <div className="font-display text-xl font-semibold">Ambiance familiale</div>
+              <div className="font-display text-xl font-semibold">
+                Ambiance familiale
+              </div>
               <div className="text-xs text-muted-foreground">
                 Plage, jardin et lagon - portée de pas
               </div>
@@ -306,9 +335,10 @@ function Presentation() {
             Un refuge tropical entre lagon, sable clair et baobabs
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-            Nich- à Mangily, l'Ifaty Beach Club réunit le confort d'un hôtel de bord de mer et
-            l'esprit nature d'Ifaty : chambres lumineuses, bungalows avec terrasse, restaurant,
-            piscines et départs d'excursions.
+            Nich- à Mangily, l'Ifaty Beach Club réunit le confort d'un hôtel de
+            bord de mer et l'esprit nature d'Ifaty : chambres lumineuses,
+            bungalows avec terrasse, restaurant, piscines et départs
+            d'excursions.
           </p>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2">
             {[
@@ -317,7 +347,10 @@ function Presentation() {
               { icon: Sparkles, label: "Rénovation complète 2022" },
               { icon: ShieldCheck, label: "Réception 24h/24" },
             ].map((feature) => (
-              <li key={feature.label} className="flex items-center gap-3 text-foreground">
+              <li
+                key={feature.label}
+                className="flex items-center gap-3 text-foreground"
+              >
                 <span className="grid h-10 w-10 place-items-center radius-pill bg-primary/10 text-primary">
                   <feature.icon className="h-5 w-5" />
                 </span>
@@ -333,7 +366,8 @@ function Presentation() {
 
 function Rooms() {
   const [filter, setFilter] = useState("Tous");
-  const list = filter === "Tous" ? ROOMS : ROOMS.filter((room) => room.type === filter);
+  const list =
+    filter === "Tous" ? ROOMS : ROOMS.filter((room) => room.type === filter);
 
   return (
     <Section
@@ -380,14 +414,17 @@ function Rooms() {
                 </div> */}
               </div>
               <div className="flex flex-1 flex-col p-6">
-                <h3 className="font-display text-xl font-semibold text-foreground">{room.name}</h3>
+                <h3 className="font-display text-xl font-semibold text-foreground">
+                  {room.name}
+                </h3>
                 <ul className="mt-3 space-y-1.5">
                   {room.features.map((feature) => (
                     <li
                       key={feature}
                       className="flex items-center gap-2 text-sm text-muted-foreground"
                     >
-                      <ChevronRight className="h-3.5 w-3.5 text-accent" /> {feature}
+                      <ChevronRight className="h-3.5 w-3.5 text-accent" />{" "}
+                      {feature}
                     </li>
                   ))}
                 </ul>
@@ -441,7 +478,9 @@ function Services() {
             <span className="grid h-12 w-12 place-items-center radius-panel bg-gradient-sunset text-primary-foreground transition-transform group-hover:scale-110">
               <service.icon className="h-6 w-6" />
             </span>
-            <span className="text-sm font-medium text-foreground">{service.label}</span>
+            <span className="text-sm font-medium text-foreground">
+              {service.label}
+            </span>
           </div>
         ))}
       </div>
@@ -455,7 +494,9 @@ function Services() {
 function Activities() {
   const [filter, setFilter] = useState("Toutes");
   const list =
-    filter === "Toutes" ? ACTIVITIES : ACTIVITIES.filter((activity) => activity.cat === filter);
+    filter === "Toutes"
+      ? ACTIVITIES
+      : ACTIVITIES.filter((activity) => activity.cat === filter);
 
   return (
     <Section
@@ -464,7 +505,10 @@ function Activities() {
       title="Vivez le lagon, autrement"
       subtitle="Aventures nautiques, observation de la faune et explorations terrestres au d-part de l'hôtel."
     >
-      <div className="mb-10 flex flex-wrap justify-center gap-2" aria-label="Filtrer les activit-s">
+      <div
+        className="mb-10 flex flex-wrap justify-center gap-2"
+        aria-label="Filtrer les activit-s"
+      >
         {ACT_FILTERS.map((item) => (
           <button
             key={item}
@@ -498,9 +542,13 @@ function Activities() {
             <div className="absolute inset-x-0 bottom-0 p-6 text-white">
               <div className="mb-1 flex items-center gap-2">
                 <activity.icon className="h-5 w-5 text-accent" />
-                <h3 className="font-display text-2xl font-semibold">{activity.name}</h3>
+                <h3 className="font-display text-2xl font-semibold">
+                  {activity.name}
+                </h3>
               </div>
-              {activity.note && <p className="text-sm text-white/80">{activity.note}</p>}
+              {activity.note && (
+                <p className="text-sm text-white/80">{activity.note}</p>
+              )}
             </div>
           </article>
         ))}
@@ -568,7 +616,9 @@ function Attractions() {
               <h3 className="font-display text-xl font-semibold text-foreground">
                 {attraction.name}
               </h3>
-              <p className="mt-2 text-sm text-muted-foreground">{attraction.desc}</p>
+              <p className="mt-2 text-sm text-muted-foreground">
+                {attraction.desc}
+              </p>
             </div>
           </article>
         ))}
@@ -590,13 +640,17 @@ function Ecology() {
               Un séjour respectueux du lagon
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Une d-marche durable pensée pour préserver l'Écosystème d'Ifaty et valoriser les
-              ressources locales.
+              Une d-marche durable pensée pour préserver l'Écosystème d'Ifaty et
+              valoriser les ressources locales.
             </p>
           </div>
           <ul className="grid gap-4 sm:grid-cols-2">
             {[
-              { icon: Sun, title: "Énergie solaire", text: "Production et eau chaude solaires" },
+              {
+                icon: Sun,
+                title: "Énergie solaire",
+                text: "Production et eau chaude solaires",
+              },
               {
                 icon: Sparkles,
                 title: "Rénovation 2022",
@@ -607,12 +661,23 @@ function Ecology() {
                 title: "Ancrage local",
                 text: "Soutien aux communautés et guides locaux",
               },
-              { icon: Waves, title: "Lagon préservé", text: "Sensibilisation aux milieux marins" },
+              {
+                icon: Waves,
+                title: "Lagon préservé",
+                text: "Sensibilisation aux milieux marins",
+              },
             ].map((item) => (
-              <li key={item.title} className="radius-card bg-background/70 p-4 backdrop-blur">
+              <li
+                key={item.title}
+                className="radius-card bg-background/70 p-4 backdrop-blur"
+              >
                 <item.icon className="mb-2 h-6 w-6 text-eco" />
-                <div className="text-sm font-semibold text-foreground">{item.title}</div>
-                <div className="mt-1 text-xs text-muted-foreground">{item.text}</div>
+                <div className="text-sm font-semibold text-foreground">
+                  {item.title}
+                </div>
+                <div className="mt-1 text-xs text-muted-foreground">
+                  {item.text}
+                </div>
               </li>
             ))}
           </ul>
@@ -656,8 +721,8 @@ function Reviews() {
               Score basé sur la moyenne des évaluations de nos clients (Booking.com, Google et TripAdvisor).
             </p> */}
 
-            {/* Ratings Bars */}
-            {/* <div className="mt-6 space-y-3">
+          {/* Ratings Bars */}
+          {/* <div className="mt-6 space-y-3">
               {[
                 { label: "Emplacement", score: 98 },
                 { label: "Cadre & Ambiance", score: 96 },
@@ -685,7 +750,7 @@ function Reviews() {
             <h3 className="font-display text-lg font-semibold text-foreground mb-4">
               Les avis soulignent principalement :
             </h3>
-            
+
             <div className="space-y-4">
               {[
                 {
@@ -710,7 +775,9 @@ function Reviews() {
                 },
               ].map((item, idx) => (
                 <div key={idx} className="flex gap-4 items-start">
-                  <span className={`grid h-10 w-10 shrink-0 place-items-center radius-panel ${item.color}`}>
+                  <span
+                    className={`grid h-10 w-10 shrink-0 place-items-center radius-panel ${item.color}`}
+                  >
                     <item.icon className="h-5 w-5" />
                   </span>
                   <div>
@@ -721,7 +788,7 @@ function Reviews() {
                 </div>
               ))}
             </div>
-            
+
             {/* Info note */}
             {/* <div className="mt-5 pt-4 border-t border-border/50 flex gap-2.5 items-start text-xs text-muted-foreground">
               <ShieldCheck className="h-4.5 w-4.5 shrink-0 text-accent" />
@@ -737,17 +804,27 @@ function Reviews() {
           {/* Card 3: Id-al pour */}
           <div className="radius-card bg-card p-6 shadow-card border border-border/50">
             <h3 className="font-display text-lg font-semibold text-foreground mb-3">
-              L'Ifaty Beach Club Resort est particulièrement adapté aux voyageurs recherchant :
+              L'Ifaty Beach Club Resort est particulièrement adapté aux
+              voyageurs recherchant :
             </h3>
             <div className="grid gap-3 sm:grid-cols-2">
               {[
                 { icon: Sun, text: "Un séjour balnéaire à Ifaty" },
-                { icon: Anchor, text: "Des excursions marines et la découverte du lagon" },
+                {
+                  icon: Anchor,
+                  text: "Des excursions marines et la découverte du lagon",
+                },
                 { icon: Fish, text: "L'observation des baleines en saison" },
                 { icon: Users, text: "Des vacances en famille" },
-                { icon: Eye, text: "Un cadre idéal pour admirer les couchers de soleil sur le canal du Mozambique." },
+                {
+                  icon: Eye,
+                  text: "Un cadre idéal pour admirer les couchers de soleil sur le canal du Mozambique.",
+                },
               ].map((item, idx) => (
-                <div key={idx} className="flex items-center gap-3 p-2 rounded-lg bg-secondary/20 hover:bg-secondary/40 transition-colors">
+                <div
+                  key={idx}
+                  className="flex items-center gap-3 p-2 rounded-lg bg-secondary/20 hover:bg-secondary/40 transition-colors"
+                >
                   <span className="grid h-8 w-8 shrink-0 place-items-center radius-pill bg-white text-primary shadow-sm">
                     <item.icon className="h-4 w-4" />
                   </span>
@@ -779,8 +856,16 @@ function Location() {
         <div className="flex flex-col justify-center">
           <ul className="space-y-5">
             {[
-              { icon: MapPin, title: "Adresse", text: "VJF5+F99, Mangily, Ifaty, Madagascar" },
-              { icon: Car, title: "Depuis Tuléar", text: "Environ 27 km au nord par la RN9" },
+              {
+                icon: MapPin,
+                title: "Adresse",
+                text: "VJF5+F99, Mangily, Ifaty, Madagascar",
+              },
+              {
+                icon: Car,
+                title: "Depuis Tuléar",
+                text: "Environ 27 km au nord par la RN9",
+              },
               {
                 icon: CalendarDays,
                 title: "Accueil",
@@ -792,8 +877,12 @@ function Location() {
                   <item.icon className="h-5 w-5" />
                 </span>
                 <div>
-                  <div className="font-semibold text-foreground">{item.title}</div>
-                  <div className="text-sm text-muted-foreground">{item.text}</div>
+                  <div className="font-semibold text-foreground">
+                    {item.title}
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    {item.text}
+                  </div>
                 </div>
               </li>
             ))}
@@ -816,7 +905,11 @@ function Location() {
 
 function Contact() {
   return (
-    <Section id="contact" eyebrow="Réservation" title="Demander une disponibilité">
+    <Section
+      id="contact"
+      eyebrow="Réservation"
+      title="Demander une disponibilité"
+    >
       <div className="grid gap-8 lg:grid-cols-5">
         <form
           onSubmit={(event) => {
@@ -857,7 +950,10 @@ function Contact() {
           </div>
           <div>
             <Label>Message</Label>
-            <Textarea rows={4} placeholder="Vos préférences, questions ou besoin de transfert..." />
+            <Textarea
+              rows={4}
+              placeholder="Vos préférences, questions ou besoin de transfert..."
+            />
           </div>
           <div className="flex flex-wrap gap-3 pt-2">
             <Button
@@ -866,7 +962,11 @@ function Contact() {
             >
               Envoyer la demande
             </Button>
-            <a href="https://wa.me/261346117982" target="_blank" rel="noreferrer">
+            <a
+              href="https://wa.me/261346117982"
+              target="_blank"
+              rel="noreferrer"
+            >
               <Button
                 type="button"
                 variant="outline"
@@ -885,11 +985,13 @@ function Contact() {
               Besoin d'une réponse rapide ?
             </h3>
             <p className="mb-6 text-white/85">
-              Contactez l'équipe directement pour organiser votre arrivée ou une excursion.
+              Contactez l'équipe directement pour organiser votre arrivée ou une
+              excursion.
             </p>
             <ul className="space-y-4 text-sm">
               <li className="flex items-center gap-3">
-                <MessageCircle className="h-4 w-4" /> WhatsApp : +261 34 61 179 82
+                <MessageCircle className="h-4 w-4" /> WhatsApp : +261 34 61 179
+                82
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4" /> contact@ifatybeachclub.mg
@@ -946,4 +1048,3 @@ export function VitrineHomePage() {
     </div>
   );
 }
-
