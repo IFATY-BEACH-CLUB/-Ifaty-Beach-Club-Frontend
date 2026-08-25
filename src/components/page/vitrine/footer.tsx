@@ -8,6 +8,7 @@ const quickLinks = [
   { label: "Activités", to: "/activites" },
   { label: "Galerie", to: "/#gallery" },
   { label: "Contact", to: "/#contact" },
+  { label: "Partenaires", to: "/partenaires" },
 ];
 
 export function Footer() {

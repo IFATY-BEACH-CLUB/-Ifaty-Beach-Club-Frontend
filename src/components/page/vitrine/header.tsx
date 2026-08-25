@@ -1,5 +1,5 @@
 ﻿import { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ChevronUp, Menu, Phone, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo/IfatyBeachClub.jpg";
@@ -13,6 +13,7 @@ const NAV = [
   { label: "Avis", href: "#reviews" },
   { label: "Localisation", href: "#location" },
   { label: "Contact", href: "#contact" },
+  { label: "Partenaires", href: "/partenaires" },
 ];
 
 const SECTION_IDS = [
@@ -29,6 +30,7 @@ const SECTION_IDS = [
 ];
 
 export function Header() {
+  const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("top");
@@ -76,8 +78,11 @@ export function Header() {
   }, [open]);
 
   const isActive = useCallback(
-    (href: string) => href.startsWith("#") && activeSection === href.replace("#", ""),
-    [activeSection],
+    (href: string) =>
+      href.startsWith("#")
+        ? location.pathname === "/" && activeSection === href.replace("#", "")
+        : location.pathname === href,
+    [activeSection, location.pathname],
   );
 
   return (
@@ -90,26 +95,27 @@ export function Header() {
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 lg:h-20 lg:px-8">
           <Link
             to="/#top"
-            className="group flex items-center gap-3"
+            className="group flex shrink-0 items-center gap-2.5 mr-4"
             onClick={() => setOpen(false)}
           >
-            <div className="h-12 w-12 overflow-hidden radius-pill bg-white shadow-soft ring-1 ring-white/40 transition-all group-hover:ring-accent/70">
+            <div className="h-11 w-11 shrink-0 overflow-hidden radius-pill bg-white shadow-soft ring-1 ring-white/40 transition-all group-hover:ring-accent/70">
               <img src={logo} alt="Ifaty Beach Club" className="h-full w-full object-cover" />
             </div>
             <div
-              className={`leading-tight transition-colors ${scrolled ? "text-foreground" : "text-white"}`}
+              className={`whitespace-nowrap leading-tight transition-colors ${scrolled ? "text-foreground" : "text-white"}`}
             >
               <div className="font-display text-lg font-semibold">Ifaty Beach Club</div>
-              <div className="text-[10px] uppercase tracking-[0.2em] opacity-80">
-                Mangily, Madagascar
+              <div className="text-[10px] uppercase tracking-[0.2em] opacity-80 leading-tight">
+                <div>Mangily,</div>
+                <div>Madagascar</div>
               </div>
             </div>
           </Link>
 
-          <nav className="hidden items-center gap-6 lg:flex">
+          <nav className="hidden shrink-0 items-center gap-5 xl:flex">
             {NAV.map((item) => {
               const isHash = item.href.startsWith("#");
-              const className = `text-sm font-medium transition-colors hover:text-accent ${
+              const className = `whitespace-nowrap text-sm font-medium transition-colors hover:text-accent ${
                 scrolled ? "text-foreground" : "text-white/90"
               } ${isActive(item.href) ? "nav-link-active" : ""}`;
 
@@ -129,14 +135,14 @@ export function Header() {
             })}
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center gap-3 xl:ml-4 xl:gap-6">
             <a
               href="tel:+261346117982"
-              className={`hidden items-center gap-2 text-sm font-medium transition-colors hover:text-accent xl:inline-flex ${
+              className={`hidden items-center gap-1.5 whitespace-nowrap text-xs font-medium transition-colors hover:text-accent xl:inline-flex ${
                 scrolled ? "text-foreground" : "text-white/90"
               }`}
             >
-              <Phone className="h-4 w-4" />
+              <Phone className="h-3.5 w-3.5 shrink-0" />
               +261 34 61 179 82
             </a>
             <Link to="/#contact" className="hidden sm:inline-flex">
@@ -145,7 +151,7 @@ export function Header() {
               </Button>
             </Link>
             <button
-              className={`radius-control p-2 transition-colors lg:hidden ${scrolled || open ? "text-foreground" : "text-white"}`}
+              className={`radius-control p-2 transition-colors xl:hidden ${scrolled || open ? "text-foreground" : "text-white"}`}
               onClick={() => setOpen((value) => !value)}
               aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
               aria-expanded={open}
@@ -156,7 +162,7 @@ export function Header() {
         </div>
 
         {open && (
-          <div className="fixed inset-0 top-16 z-40 lg:hidden">
+          <div className="fixed inset-0 top-16 z-40 xl:hidden">
             <div
               className="absolute inset-0 bg-black/40 backdrop-blur-sm lightbox-backdrop"
               onClick={() => setOpen(false)}

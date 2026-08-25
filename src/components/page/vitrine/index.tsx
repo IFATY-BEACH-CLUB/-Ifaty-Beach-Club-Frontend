@@ -28,8 +28,16 @@ import {
   Wifi,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Footer } from "./footer";
@@ -50,7 +58,6 @@ import hero from "@/assets/images/vue_plage.jpg";
 import presentation from "@/assets/images/vue_bengalow (1).jpg";
 import roomDouble from "@/assets/images/deux_lit_twin.jpeg";
 import roomDouble2 from "@/assets/room-double.jpg";
-console.log("roomDouble =", roomDouble);
 import roomFamily from "@/assets/room-family.jpg";
 import roomGarden from "@/assets/images/bengalowTest.jpeg";
 import roomSea from "@/assets/images/vue_bengalow2.jpg";
@@ -68,46 +75,44 @@ const ROOMS = [
   {
     name: "Chambre Double",
     type: "Double",
-    // capacity: 2,
-    // price: 65,
     img: roomDouble2,
     features: ["Vue jardin", "Salle de bain privative", "Ventilateur"],
   },
   {
     name: "Chambre Twin",
     type: "Twin",
-    // capacity: 2,
-    // price: 70,
     img: roomDouble,
     features: ["Lits jumeaux", "Climatisation", "Coffre-fort"],
   },
   {
     name: "Chambre Familiale",
     type: "Familiale",
-    // capacity: 4,
-    // price: 110,
     img: roomFamily,
     features: ["Jusqu'à 4 personnes", "Espace salon", "Climatisation"],
   },
   {
     name: "Bungalow Jardin",
     type: "Bungalow",
-    // capacity: 2,
-    // price: 95,
     img: roomGarden,
     features: ["Terrasse privée", "Toit en chaume", "Jardin tropical"],
   },
   {
     name: "Bungalow Vue Mer",
     type: "Bungalow",
-    // capacity: 2,
-    // price: 140,
     img: roomSea,
     features: ["Face au lagon", "Terrasse vue mer", "Climatisation"],
   },
 ];
 
 const ROOM_FILTERS = ["Tous", "Double", "Twin", "Familiale", "Bungalow"];
+
+const ROOM_TYPE_OPTIONS = ROOMS.map((room) => room.name);
+
+const PENSION_OPTIONS = [
+  "Petit-déjeuner",
+  "Demi-pension",
+  "Pension complète",
+];
 
 const SERVICES = [
   { icon: Waves, label: "Deux piscines extérieures" },
@@ -245,7 +250,7 @@ function Hero() {
             Mangily - Ifaty - Madagascar
           </p>
           <h1 className="font-display text-4xl font-semibold leading-[1.05] sm:text-6xl lg:text-7xl">
-            Ifaty Beach Club, hôtel face au lagonnnnn
+            Ifaty Beach Club, hôtel face au lagon
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/90 md:text-xl">
@@ -335,7 +340,7 @@ function Presentation() {
             Un refuge tropical entre lagon, sable clair et baobabs
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-            Nich- à Mangily, l'Ifaty Beach Club réunit le confort d'un hôtel de
+            Niché à Mangily, l'Ifaty Beach Club réunit le confort d'un hôtel de
             bord de mer et l'esprit nature d'Ifaty : chambres lumineuses,
             bungalows avec terrasse, restaurant, piscines et départs
             d'excursions.
@@ -374,12 +379,12 @@ function Rooms() {
       id="rooms"
       eyebrow="Hébergements"
       title="Chambres & bungalows"
-      subtitle="Choisissez un cocon adapt- à votre rythme : jardin, famille ou vue mer."
+      subtitle="Choisissez un cocon adapté à votre rythme : jardin, famille ou vue mer."
     >
       <div
         className="mb-10 flex flex-wrap justify-center gap-2"
         role="list"
-        aria-label="Filtrer les h-bergements"
+        aria-label="Filtrer les hébergements"
       >
         {ROOM_FILTERS.map((item) => (
           <button
@@ -409,9 +414,6 @@ function Rooms() {
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                   loading="lazy"
                 />
-                {/* <div className="absolute left-3 top-3 flex items-center gap-1 radius-pill bg-background/95 px-3 py-1 text-xs font-medium backdrop-blur">
-                  <Users className="h-3 w-3" /> {room.capacity} pers.
-                </div> */}
               </div>
               <div className="flex flex-1 flex-col p-6">
                 <h3 className="font-display text-xl font-semibold text-foreground">
@@ -429,18 +431,7 @@ function Rooms() {
                   ))}
                 </ul>
                 <div className="mt-auto flex items-end justify-between pt-5">
-                  {/* <div>
-                    <div className="text-xs text-muted-foreground">À partir de</div>
-                    <div className="font-display text-2xl font-semibold text-primary">
-                      {room.price}€
-                      <span className="font-sans text-sm text-muted-foreground">/nuit</span>
-                    </div>
-                  </div> */}
-                  <Link to="/#contact">
-                    {/* <Button variant="outline" size="sm" className="radius-pill">
-                      Réserver
-                    </Button> */}
-                  </Link>
+                  <Link to="/#contact"></Link>
                 </div>
               </div>
             </div>
@@ -453,7 +444,7 @@ function Rooms() {
             size="lg"
             className="h-12 radius-pill border-0 bg-gradient-sunset px-8 text-primary-foreground hover:opacity-90"
           >
-            Voir tous les h-bergements <ChevronRight className="ml-1 h-4 w-4" />
+            Voir tous les hébergements <ChevronRight className="ml-1 h-4 w-4" />
           </Button>
         </Link>
       </div>
@@ -503,11 +494,11 @@ function Activities() {
       id="activities"
       eyebrow="Activités"
       title="Vivez le lagon, autrement"
-      subtitle="Aventures nautiques, observation de la faune et explorations terrestres au d-part de l'hôtel."
+      subtitle="Aventures nautiques, observation de la faune et explorations terrestres au départ de l'hôtel."
     >
       <div
         className="mb-10 flex flex-wrap justify-center gap-2"
-        aria-label="Filtrer les activit-s"
+        aria-label="Filtrer les activités"
       >
         {ACT_FILTERS.map((item) => (
           <button
@@ -559,7 +550,7 @@ function Activities() {
             size="lg"
             className="h-12 radius-pill border-0 bg-gradient-sunset px-8 text-primary-foreground hover:opacity-90"
           >
-            Voir toutes les activit-s <ChevronRight className="ml-1 h-4 w-4" />
+            Voir toutes les activités <ChevronRight className="ml-1 h-4 w-4" />
           </Button>
         </Link>
       </div>
@@ -640,7 +631,7 @@ function Ecology() {
               Un séjour respectueux du lagon
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Une d-marche durable pensée pour préserver l'Écosystème d'Ifaty et
+              Une démarche durable pensée pour préserver l'Écosystème d'Ifaty et
               valoriser les ressources locales.
             </p>
           </div>
@@ -696,56 +687,7 @@ function Reviews() {
       className="bg-secondary/40"
     >
       <div className="grid gap-8 lg:grid-cols-12">
-        {/* Left Column: Synthèse des avis & Profils */}
         <div className="space-y-6 lg:col-span-5">
-          {/* Card 1: Score & Note Globale */}
-          {/* <div className="radius-card bg-card p-6 shadow-card border border-border/50">
-            <div className="flex items-center justify-between">
-              <div>
-                <span className="font-display text-5xl font-bold text-foreground">4.8</span>
-                <span className="text-xl text-muted-foreground"> / 5</span>
-              </div>
-              <div className="flex flex-col items-end">
-                <div className="flex gap-0.5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-accent text-accent" />
-                  ))}
-                </div>
-                <span className="mt-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  Excellent
-                </span>
-              </div>
-            </div>
-            
-            <p className="mt-4 text-xs text-muted-foreground leading-relaxed">
-              Score basé sur la moyenne des évaluations de nos clients (Booking.com, Google et TripAdvisor).
-            </p> */}
-
-          {/* Ratings Bars */}
-          {/* <div className="mt-6 space-y-3">
-              {[
-                { label: "Emplacement", score: 98 },
-                { label: "Cadre & Ambiance", score: 96 },
-                { label: "Piscines & Loisirs", score: 94 },
-                { label: "Accueil", score: 95 },
-              ].map((item) => (
-                <div key={item.label}>
-                  <div className="flex justify-between text-xs font-medium mb-1">
-                    <span className="text-foreground">{item.label}</span>
-                    <span className="text-muted-foreground">{item.score}%</span>
-                  </div>
-                  <div className="h-1.5 w-full bg-secondary rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-sunset rounded-full animate-pulse-slow"
-                      style={{ width: `${item.score}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div> */}
-
-          {/* Card 2: Synthèse plébiscitée (Ce que soulignent les avis) */}
           <div className="radius-card bg-card p-6 shadow-card border border-border/50">
             <h3 className="font-display text-lg font-semibold text-foreground mb-4">
               Les avis soulignent principalement :
@@ -770,7 +712,7 @@ function Reviews() {
                 },
                 {
                   icon: Anchor,
-                  text: "La proximit- des activit-s nautiques",
+                  text: "La proximité des activités nautiques",
                   color: "text-accent bg-accent/10",
                 },
               ].map((item, idx) => (
@@ -788,20 +730,10 @@ function Reviews() {
                 </div>
               ))}
             </div>
-
-            {/* Info note */}
-            {/* <div className="mt-5 pt-4 border-t border-border/50 flex gap-2.5 items-start text-xs text-muted-foreground">
-              <ShieldCheck className="h-4.5 w-4.5 shrink-0 text-accent" />
-              <p className="leading-normal">
-                Les points parfois mentionn-s concernent certains services qui peuvent varier selon la saison et l'affluence.
-              </p>
-            </div> */}
           </div>
         </div>
 
-        {/* Right Column: Profils voyageurs & Avis */}
         <div className="space-y-6 lg:col-span-7">
-          {/* Card 3: Id-al pour */}
           <div className="radius-card bg-card p-6 shadow-card border border-border/50">
             <h3 className="font-display text-lg font-semibold text-foreground mb-3">
               L'Ifaty Beach Club Resort est particulièrement adapté aux
@@ -904,6 +836,8 @@ function Location() {
 }
 
 function Contact() {
+  const [transfert, setTransfert] = useState(false);
+
   return (
     <Section
       id="contact"
@@ -914,13 +848,14 @@ function Contact() {
         <form
           onSubmit={(event) => {
             event.preventDefault();
-            alert("Merci ! Votre demande a bien été envoy-e.");
+            alert("Merci ! Votre demande a bien été envoyée.");
           }}
           className="grid gap-4 radius-card bg-card p-6 shadow-card lg:col-span-3 md:p-8"
         >
+          {/* Nom du client */}
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <Label>Nom</Label>
+              <Label>Nom du client</Label>
               <Input required placeholder="Votre nom" />
             </div>
             <div>
@@ -933,11 +868,71 @@ function Contact() {
               <Label>Téléphone</Label>
               <Input placeholder="+261 ..." />
             </div>
+          </div>
+
+          {/* Nombre de personnes : adultes et enfants avec âge */}
+          <div>
+            <Label>Nombre de personnes</Label>
+            <div className="mt-1 grid gap-4 sm:grid-cols-2">
+              <div>
+                <Label className="text-xs font-normal text-muted-foreground">
+                  Adultes
+                </Label>
+                <Input type="number" min={1} defaultValue={2} />
+              </div>
+              <div>
+                <Label className="text-xs font-normal text-muted-foreground">
+                  Enfants
+                </Label>
+                <Input type="number" min={0} defaultValue={0} />
+              </div>
+            </div>
+            <Input
+              className="mt-2"
+              placeholder="Âge des enfants (ex : 4 ans, 9 ans)"
+            />
+          </div>
+
+          {/* Type et nombre de chambres */}
+          <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <Label>Personnes</Label>
-              <Input type="number" min={1} defaultValue={2} />
+              <Label>Type de chambre</Label>
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Choisir un type de chambre" />
+                </SelectTrigger>
+                <SelectContent>
+                  {ROOM_TYPE_OPTIONS.map((type) => (
+                    <SelectItem key={type} value={type}>
+                      {type}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label>Nombre de chambres</Label>
+              <Input type="number" min={1} defaultValue={1} />
             </div>
           </div>
+
+          {/* Choix de la pension */}
+          <div>
+            <Label>Choix de la pension</Label>
+            <Select>
+              <SelectTrigger>
+                <SelectValue placeholder="Sélectionner une formule" />
+              </SelectTrigger>
+              <SelectContent>
+                {PENSION_OPTIONS.map((option) => (
+                  <SelectItem key={option} value={option}>
+                    {option}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <Label>Arrivée</Label>
@@ -948,13 +943,28 @@ function Contact() {
               <Input type="date" required />
             </div>
           </div>
+
+          {/* Demande de transfert */}
+          <div className="flex items-center gap-2">
+            <Checkbox
+              id="transfert"
+              checked={transfert}
+              onCheckedChange={(checked) => setTransfert(checked === true)}
+            />
+            <Label htmlFor="transfert" className="cursor-pointer font-normal">
+              Je souhaite une demande de transfert (aéroport / gare)
+            </Label>
+          </div>
+
+          {/* Particularités ou demandes spécifiques */}
           <div>
-            <Label>Message</Label>
+            <Label>Particularités ou demandes spécifiques</Label>
             <Textarea
               rows={4}
-              placeholder="Vos préférences, questions ou besoin de transfert..."
+              placeholder="Régime alimentaire, lit bébé, lune de miel, etc."
             />
           </div>
+
           <div className="flex flex-wrap gap-3 pt-2">
             <Button
               type="submit"
@@ -1001,7 +1011,7 @@ function Contact() {
               </li>
             </ul>
             <div className="mt-8 border-t border-white/20 pt-6 text-xs text-white/75">
-              R-ponse sous 24h selon disponibilité.
+              Réponse sous 24h selon disponibilité.
             </div>
           </div>
         </aside>
