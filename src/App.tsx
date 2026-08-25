@@ -3,6 +3,7 @@ import { BrowserRouter, Outlet, Route, Routes, useLocation } from 'react-router-
 import './App.css'
 import { ActivitesPage } from './components/page/vitrine/activites'
 import { HebergementsPage } from './components/page/vitrine/hebergements'
+import { PartenairesPage } from './components/page/vitrine/partenaires'
 import { VitrineHomePage } from './components/page/vitrine'
 
 function HashScroll() {
@@ -38,6 +39,7 @@ function App() {
           <Route path="/" element={<VitrineHomePage />} />
           <Route path="/hebergements" element={<HebergementsPage />} />
           <Route path="/activites" element={<ActivitesPage />} />
+          <Route path="/partenaires" element={<PartenairesPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
