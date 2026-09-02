@@ -1,5 +1,5 @@
 ﻿import { Link } from "react-router-dom";
-import { Facebook, Heart, Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Facebook, Globe, Heart, Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import logo from "@/assets/logo/IfatyBeachClub.jpg";
 
 const quickLinks = [
@@ -56,21 +56,40 @@ export function Footer() {
           <ul className="space-y-3 text-sm text-white/70">
             <li className="flex items-start gap-2">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-              <span>VJF5+F99, Mangily, Ifaty, Madagascar</span>
+              <span>B.P 285, Tuléar 601, Madagascar</span>
             </li>
-            <li className="flex items-center gap-2">
-              <Phone className="h-4 w-4 shrink-0 text-accent" />
-              <a href="tel:+261346117982" className="transition-colors hover:text-white">
-                +261 34 61 179 82
-              </a>
+            <li className="flex items-start gap-2">
+              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+              <span className="flex flex-col">
+                <a href="tel:+261342970999" className="transition-colors hover:text-white">
+                  +261 34 29 709 99
+                </a>
+                <a href="tel:+261342783684" className="transition-colors hover:text-white">
+                  +261 34 27 836 84
+                </a>
+                <a href="tel:+261346117982" className="transition-colors hover:text-white">
+                  +261 34 61 179 82
+                </a>
+              </span>
             </li>
             <li className="flex items-center gap-2">
               <Mail className="h-4 w-4 shrink-0 text-accent" />
               <a
-                href="mailto:contact@ifatybeachclub.mg"
+                href="mailto:contact@ifaty.com"
                 className="transition-colors hover:text-white"
               >
-                contact@ifatybeachclub.mg
+                contact@ifaty.com
+              </a>
+            </li>
+            <li className="flex items-center gap-2">
+              <Globe className="h-4 w-4 shrink-0 text-accent" />
+              <a
+                href="https://www.ifaty.com"
+                target="_blank"
+                rel="noreferrer"
+                className="transition-colors hover:text-white"
+              >
+                www.ifaty.com
               </a>
             </li>
           </ul>
@@ -80,9 +99,13 @@ export function Footer() {
           <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider">Suivez-nous</h4>
           <div className="flex gap-3">
             {[
-              { icon: Facebook, href: "#", label: "Facebook" },
+              {
+                icon: Facebook,
+                href: "https://www.facebook.com/p/Ifaty-Beach-Club-Toliara-Resort-100065581236031/",
+                label: "Facebook",
+              },
               { icon: Instagram, href: "#", label: "Instagram" },
-              { icon: MessageCircle, href: "https://wa.me/261346117982", label: "WhatsApp" },
+              { icon: MessageCircle, href: "https://wa.me/261385548382", label: "WhatsApp" },
             ].map((social) => (
               <a
                 key={social.label}
@@ -97,7 +120,7 @@ export function Footer() {
             ))}
           </div>
           <a
-            href="https://wa.me/261346117982"
+            href="https://wa.me/261385548382"
             target="_blank"
             rel="noreferrer"
             className="mt-6 inline-flex items-center gap-2 radius-pill bg-white px-5 py-3 text-sm font-semibold text-[color:var(--deep)] transition-transform hover:scale-105"

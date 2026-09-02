@@ -137,13 +137,13 @@ export function Header() {
 
           <div className="flex shrink-0 items-center gap-3 xl:ml-4 xl:gap-6">
             <a
-              href="tel:+261346117982"
+              href="tel:+261342970999"
               className={`hidden items-center gap-1.5 whitespace-nowrap text-xs font-medium transition-colors hover:text-accent xl:inline-flex ${
                 scrolled ? "text-foreground" : "text-white/90"
               }`}
             >
               <Phone className="h-3.5 w-3.5 shrink-0" />
-              +261 34 61 179 82
+              +261 34 29 709 99
             </a>
             <Link to="/#contact" className="hidden sm:inline-flex">
               <Button className="radius-pill border-0 bg-gradient-sunset px-5 text-primary-foreground transition-transform hover:scale-105 hover:opacity-90">
@@ -203,7 +203,7 @@ export function Header() {
                   </Button>
                 </Link>
                 <a
-                  href="tel:+261346117982"
+                  href="tel:+261342970999"
                   className="mt-2 flex items-center justify-center gap-2 radius-pill border border-border px-4 py-3 text-sm font-medium text-foreground"
                 >
                   <Phone className="h-4 w-4" />
