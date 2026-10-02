@@ -1,5 +1,16 @@
-﻿import { Link } from "react-router-dom";
-import { useEffect, useState, type ReactNode } from "react";
+﻿import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import {
   Anchor,
   Bath,
@@ -22,45 +33,34 @@ import {
   Star,
   Sun,
   Trees,
-  Utensils,
   Users,
+  Utensils,
   Waves,
   Wifi,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useEffect, useState, type ReactNode } from "react";
+import { Link } from "react-router-dom";
 import { Footer } from "./footer";
 import { Header } from "./header";
 
 import actPirogue from "@/assets/activity-pirogue.jpg";
-import actQuad from "@/assets/images/quad.jpeg";
 import actSnorkel from "@/assets/activity-snorkeling.jpg";
 import actWhales from "@/assets/activity-whales.jpg";
 import attrBaobabs from "@/assets/attraction-baobabs.jpg";
 import attrSpiny from "@/assets/attraction-spiny.jpg";
 import attrTortoises from "@/assets/attraction-tortoises.jpg";
-import galBeach from "@/assets/images/ifaty_plage.jpeg";
-import galPool from "@/assets/images/vue_piscine.jpg";
-import galRestaurant from "@/assets/images/vue_table_manger.jpg";
-import galSunset from "@/assets/images/vue_cocher_soleil.jpg";
-import hero from "@/assets/images/vue_plage.jpg";
-import presentation from "@/assets/images/vue_bengalow (1).jpg";
+import roomGarden from "@/assets/images/bengalowTest.jpeg";
 import roomDouble from "@/assets/images/deux_lit_twin.jpeg";
+import galBeach from "@/assets/images/ifaty_plage.jpeg";
+import actQuad from "@/assets/images/quad.jpeg";
+import presentation from "@/assets/images/vue_bengalow (1).jpg";
+import roomSea from "@/assets/images/vue_bengalow2.jpg";
+import galSunset from "@/assets/images/vue_cocher_soleil.jpg";
+import galPool from "@/assets/images/vue_piscine.jpg";
+import hero from "@/assets/images/vue_plage.jpg";
+import galRestaurant from "@/assets/images/vue_table_manger.jpg";
 import roomDouble2 from "@/assets/room-double.jpg";
 import roomFamily from "@/assets/room-family.jpg";
-import roomGarden from "@/assets/images/bengalowTest.jpeg";
-import roomSea from "@/assets/images/vue_bengalow2.jpg";
 
 type SectionProps = {
   id: string;
@@ -1000,11 +1000,10 @@ function Contact() {
             </p>
             <ul className="space-y-4 text-sm">
               <li className="flex items-center gap-3">
-                <MessageCircle className="h-4 w-4" /> WhatsApp : +261 34 61 179
-                82
+                <MessageCircle className="h-4 w-4" /> WhatsApp : +261 38 55 483 82
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="h-4 w-4" /> contact@ifatybeachclub.mg
+                <Mail className="h-4 w-4" /> contact@ifaty.com
               </li>
               <li className="flex items-center gap-3">
                 <MapPin className="h-4 w-4" /> Mangily, Ifaty

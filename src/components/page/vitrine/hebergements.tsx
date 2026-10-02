@@ -17,7 +17,7 @@ const ROOMS = [
     capacity: 2,
     price: 65,
     img: roomDouble,
-    features: ["Vue jardin", "Ventilateur", "Salle de bain privative", "Lit double confortable"],
+    features: ["Vue jardin", "Ventilateur", "Salle de bain privative", "1 grand lit"],
     desc: "Une chambre cosy pour les couples, lumineuse et au calme du jardin tropical.",
   },
   {
@@ -26,7 +26,7 @@ const ROOMS = [
     capacity: 2,
     price: 70,
     img: roomDouble,
-    features: ["Lits jumeaux", "Climatisation", "Coffre-fort", "Bureau"],
+    features: [ "Climatisation", "Coffre-fort", "Bureau" , "1 grand lit et 1 petit lit"],
     desc: "Parfaite pour deux voyageurs, avec deux lits séparés et le confort de la climatisation.",
   },
   {
@@ -44,7 +44,7 @@ const ROOMS = [
     capacity: 4,
     price: 110,
     img: roomFamily,
-    features: ["4 personnes", "Climatisation", "Espace salon", "2 chambres"],
+    features: ["4 personnes", "Climatisation", "Espace salon", "2 chambres", "2 grands lit et 1 petit lit"],
     desc: "Le choix idéal pour les familles, avec un coin salon et de l'espace pour tous.",
   },
   {
@@ -62,7 +62,7 @@ const ROOMS = [
     capacity: 2,
     price: 140,
     img: roomSea,
-    features: ["Face au lagon", "Climatisation", "Coffre-fort", "Terrasse vue mer"],
+    features: ["Face au lagon", "Climatisation", "Coffre-fort", "Terrasse vue mer", "1 grand lit et 2 petits lit"],
     desc: "Réveillez-vous face au lagon turquoise dans le bungalow le plus prisé de l'hôtel.",
   },
 ];

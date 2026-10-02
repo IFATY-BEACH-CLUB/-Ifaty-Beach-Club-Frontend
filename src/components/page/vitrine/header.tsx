@@ -1,8 +1,8 @@
-﻿import { useCallback, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { ChevronUp, Menu, Phone, X } from "lucide-react";
+﻿import logo from "@/assets/logo/IfatyBeachClub.jpg";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/logo/IfatyBeachClub.jpg";
+import { ChevronUp, Menu, Phone, X } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const NAV = [
   { label: "Accueil", href: "#top" },
