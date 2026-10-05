@@ -143,7 +143,7 @@ export function Header() {
               }`}
             >
               <Phone className="h-3.5 w-3.5 shrink-0" />
-              +261 34 29 709 99
+              +261 34 27 836 84
             </a>
             <Link to="/#contact" className="hidden sm:inline-flex">
               <Button className="radius-pill border-0 bg-gradient-sunset px-5 text-primary-foreground transition-transform hover:scale-105 hover:opacity-90">
