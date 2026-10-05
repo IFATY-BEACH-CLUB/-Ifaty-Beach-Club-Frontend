@@ -6,7 +6,6 @@ import { Footer } from "./footer";
 import { Header } from "./header";
 import hero from "@/assets/hero-lagoon.jpg";
 import roomDouble from "@/assets/room-double.jpg";
-import roomFamily from "@/assets/room-family.jpg";
 import roomGarden from "@/assets/room-bungalow-garden.jpg";
 import roomSea from "@/assets/room-bungalow-sea.jpg";
 
@@ -14,56 +13,30 @@ const ROOMS = [
   {
     name: "Chambre Double",
     type: "Double",
-    capacity: 2,
-    price: 65,
     img: roomDouble,
-    features: ["Vue jardin", "Ventilateur", "Salle de bain privative", "1 grand lit"],
+    features: ["1 grand lit"],
     desc: "Une chambre cosy pour les couples, lumineuse et au calme du jardin tropical.",
   },
   {
     name: "Chambre Twin",
     type: "Twin",
-    capacity: 2,
-    price: 70,
     img: roomDouble,
-    features: [ "Climatisation", "Coffre-fort", "Bureau" , "1 grand lit et 1 petit lit"],
-    desc: "Parfaite pour deux voyageurs, avec deux lits séparés et le confort de la climatisation.",
+    features: ["1 grand lit", "1 petit lit"],
+    desc: "Parfaite pour deux voyageurs, avec un grand lit et un lit d'appoint.",
   },
   {
-    name: "Chambre Triple",
-    type: "Triple",
-    capacity: 3,
-    price: 85,
-    img: roomFamily,
-    features: ["3 personnes", "Ventilateur", "Coffre-fort", "Salle de bain privative"],
-    desc: "Spacieuse et pratique pour les petites familles ou les groupes d'amis.",
-  },
-  {
-    name: "Chambre Familiale",
-    type: "Familiale",
-    capacity: 4,
-    price: 110,
-    img: roomFamily,
-    features: ["4 personnes", "Climatisation", "Espace salon", "2 chambres", "2 grands lit et 1 petit lit"],
-    desc: "Le choix idéal pour les familles, avec un coin salon et de l'espace pour tous.",
-  },
-  {
-    name: "Bungalow Jardin",
-    type: "Bungalow Jardin",
-    capacity: 2,
-    price: 95,
-    img: roomGarden,
-    features: ["Toit en chaume", "Terrasse privée", "Vue jardin", "Hamac"],
-    desc: "Un cocon au cœur du jardin tropical, avec terrasse privative pour ralentir vraiment.",
-  },
-  {
-    name: "Bungalow Vue Mer",
-    type: "Bungalow Vue Mer",
-    capacity: 2,
-    price: 140,
+    name: "Chambre Familiale vue mer",
+    type: "Familiale vue mer",
     img: roomSea,
-    features: ["Face au lagon", "Climatisation", "Coffre-fort", "Terrasse vue mer", "1 grand lit et 2 petits lit"],
-    desc: "Réveillez-vous face au lagon turquoise dans le bungalow le plus prisé de l'hôtel.",
+    features: ["1 grand lit", "2 petits lits"],
+    desc: "Réveillez-vous face au lagon turquoise dans cette chambre familiale.",
+  },
+  {
+    name: "Chambre Familiale côté jardin",
+    type: "Familiale côté jardin",
+    img: roomGarden,
+    features: ["2 grands lits", "1 petit lit"],
+    desc: "Un cocon au cœur du jardin tropical, spacieux et adapté aux familles.",
   },
 ];
 
@@ -71,10 +44,8 @@ const FILTERS = [
   "Tous",
   "Double",
   "Twin",
-  "Triple",
-  "Familiale",
-  "Bungalow Jardin",
-  "Bungalow Vue Mer",
+  "Familiale vue mer",
+  "Familiale côté jardin",
 ];
 
 export function HebergementsPage() {

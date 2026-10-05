@@ -538,7 +538,7 @@ export function PartenairesPage() {
                 commerciale.
               </p>
               <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-                <a href="mailto:contact@ifatybeachclub.mg">
+                <a href="mailto:contact@ifaty.com">
                   <Button className="h-12 radius-pill border-0 bg-white px-7 text-[color:var(--deep)] hover:opacity-90">
                     <Mail className="mr-2 h-4 w-4" /> Contacter l'équipe
                   </Button>

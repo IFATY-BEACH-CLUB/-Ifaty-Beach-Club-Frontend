@@ -1,16 +1,5 @@
-﻿import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+﻿import { Link } from "react-router-dom";
+import { useEffect, useState, type ReactNode } from "react";
 import {
   Anchor,
   Bath,
@@ -33,34 +22,44 @@ import {
   Star,
   Sun,
   Trees,
-  Users,
   Utensils,
+  Users,
   Waves,
   Wifi,
 } from "lucide-react";
-import { useEffect, useState, type ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Footer } from "./footer";
 import { Header } from "./header";
 
 import actPirogue from "@/assets/activity-pirogue.jpg";
+import actQuad from "@/assets/images/quad.jpeg";
 import actSnorkel from "@/assets/activity-snorkeling.jpg";
 import actWhales from "@/assets/activity-whales.jpg";
 import attrBaobabs from "@/assets/attraction-baobabs.jpg";
 import attrSpiny from "@/assets/attraction-spiny.jpg";
 import attrTortoises from "@/assets/attraction-tortoises.jpg";
-import roomGarden from "@/assets/images/bengalowTest.jpeg";
-import roomDouble from "@/assets/images/deux_lit_twin.jpeg";
 import galBeach from "@/assets/images/ifaty_plage.jpeg";
-import actQuad from "@/assets/images/quad.jpeg";
-import presentation from "@/assets/images/vue_bengalow (1).jpg";
-import roomSea from "@/assets/images/vue_bengalow2.jpg";
-import galSunset from "@/assets/images/vue_cocher_soleil.jpg";
 import galPool from "@/assets/images/vue_piscine.jpg";
-import hero from "@/assets/images/vue_plage.jpg";
 import galRestaurant from "@/assets/images/vue_table_manger.jpg";
+import galSunset from "@/assets/images/vue_cocher_soleil.jpg";
+import hero from "@/assets/images/vue_plage.jpg";
+import presentation from "@/assets/images/vue_bengalow (1).jpg";
+import roomDouble from "@/assets/images/deux_lit_twin.jpeg";
 import roomDouble2 from "@/assets/room-double.jpg";
-import roomFamily from "@/assets/room-family.jpg";
+import roomGarden from "@/assets/images/bengalowTest.jpeg";
+import roomSea from "@/assets/images/vue_bengalow2.jpg";
 
 type SectionProps = {
   id: string;
@@ -76,35 +75,29 @@ const ROOMS = [
     name: "Chambre Double",
     type: "Double",
     img: roomDouble2,
-    features: ["Vue jardin", "Salle de bain privative", "Ventilateur"],
+    features: ["1 grand lit"],
   },
   {
     name: "Chambre Twin",
     type: "Twin",
     img: roomDouble,
-    features: ["Lits jumeaux", "Climatisation", "Coffre-fort"],
+    features: ["1 grand lit", "1 petit lit"],
   },
   {
-    name: "Chambre Familiale",
-    type: "Familiale",
-    img: roomFamily,
-    features: ["Jusqu'à 4 personnes", "Espace salon", "Climatisation"],
-  },
-  {
-    name: "Bungalow Jardin",
-    type: "Bungalow",
-    img: roomGarden,
-    features: ["Terrasse privée", "Toit en chaume", "Jardin tropical"],
-  },
-  {
-    name: "Bungalow Vue Mer",
-    type: "Bungalow",
+    name: "Chambre Familiale vue mer",
+    type: "Familiale vue mer",
     img: roomSea,
-    features: ["Face au lagon", "Terrasse vue mer", "Climatisation"],
+    features: ["1 grand lit", "2 petits lits"],
+  },
+  {
+    name: "Chambre Familiale côté jardin",
+    type: "Familiale côté jardin",
+    img: roomGarden,
+    features: ["2 grands lits", "1 petit lit"],
   },
 ];
 
-const ROOM_FILTERS = ["Tous", "Double", "Twin", "Familiale", "Bungalow"];
+const ROOM_FILTERS = ["Tous", "Double", "Twin", "Familiale vue mer", "Familiale côté jardin"];
 
 const ROOM_TYPE_OPTIONS = ROOMS.map((room) => room.name);
 
@@ -791,7 +784,7 @@ function Location() {
               {
                 icon: MapPin,
                 title: "Adresse",
-                text: "VJF5+F99, Mangily, Ifaty, Madagascar",
+                text: "B.P 285, Tuléar 601, Madagascar",
               },
               {
                 icon: Car,
@@ -973,7 +966,7 @@ function Contact() {
               Envoyer la demande
             </Button>
             <a
-              href="https://wa.me/261346117982"
+              href="https://wa.me/261385548382"
               target="_blank"
               rel="noreferrer"
             >
@@ -1000,13 +993,14 @@ function Contact() {
             </p>
             <ul className="space-y-4 text-sm">
               <li className="flex items-center gap-3">
-                <MessageCircle className="h-4 w-4" /> WhatsApp : +261 38 55 483 82
+                <MessageCircle className="h-4 w-4" /> WhatsApp : +261 38 55 483
+                82
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4" /> contact@ifaty.com
               </li>
               <li className="flex items-center gap-3">
-                <MapPin className="h-4 w-4" /> Mangily, Ifaty
+                <MapPin className="h-4 w-4" /> B.P 285, Tuléar 601, Madagascar
               </li>
             </ul>
             <div className="mt-8 border-t border-white/20 pt-6 text-xs text-white/75">
@@ -1022,7 +1016,7 @@ function Contact() {
 function WhatsAppFloat() {
   return (
     <a
-      href="https://wa.me/261346117982"
+      href="https://wa.me/261385548382"
       target="_blank"
       rel="noreferrer"
       aria-label="Contacter l'hôtel sur WhatsApp"
