@@ -1,5 +1,6 @@
 ﻿import { Link } from "react-router-dom";
 import { useEffect, useState, type ReactNode } from "react";
+import { api, type GalleryItem } from "@/api";
 import {
   Anchor,
   Bath,
@@ -552,24 +553,52 @@ function Activities() {
 }
 
 function Gallery() {
+  const [galleryItems, setGalleryItems] = useState<GalleryItem[] | null>(null);
+  const [galleryError, setGalleryError] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    api.getGallery()
+      .then((items) => {
+        if (active) setGalleryItems(items);
+      })
+      .catch(() => {
+        if (active) setGalleryError(true);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const displayItems = galleryItems === null ? GALLERY : galleryItems;
+
   return (
     <Section id="gallery" eyebrow="Galerie" title="L'hôtel en images">
-      <div className="grid auto-rows-[180px] grid-cols-2 gap-3 md:grid-cols-4">
-        {GALLERY.map((image) => (
+      {galleryError && (
+        <p className="mb-4 text-center text-sm text-muted-foreground">
+          Galerie momentanément indisponible — affichage de notre sélection.
+        </p>
+      )}
+      {displayItems.length > 0 ? (
+        <div className="grid auto-rows-[180px] grid-cols-2 gap-3 md:grid-cols-4">
+        {displayItems.map((image, index) => (
           <div
-            key={image.alt}
-            className={`group relative overflow-hidden radius-card ${image.className}`}
+            key={"imageUrl" in image ? image.id : image.alt}
+            className={`group relative overflow-hidden radius-card ${"className" in image ? image.className : index % 7 === 0 ? "row-span-2" : ""}`}
           >
             <img
-              src={image.src}
-              alt={image.alt}
+              src={"imageUrl" in image ? image.imageUrl : image.src}
+              alt={"imageUrl" in image ? "Image de la galerie Ifaty Beach Club" : image.alt}
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
               loading="lazy"
             />
             <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/25" />
           </div>
         ))}
-      </div>
+        </div>
+      ) : (
+        <p className="text-center text-muted-foreground">Aucune photo disponible pour le moment.</p>
+      )}
     </Section>
   );
 }
